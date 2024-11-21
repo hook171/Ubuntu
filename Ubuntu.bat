@@ -1,9 +1,8 @@
 @echo off
-
 git pull origin main
-
-cmake -S . -B build
-cmake --build build
-
-:: Запуск программы
-main.exe
+if not exist build mkdir build
+cd build
+cmake ..
+cd ..
+cmake --build build.
+pause
