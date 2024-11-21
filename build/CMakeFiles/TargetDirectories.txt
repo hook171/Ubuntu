@@ -1,0 +1,2 @@
+/home/hook/Documents/GitHub/Ubuntu/build/CMakeFiles/edit_cache.dir
+/home/hook/Documents/GitHub/Ubuntu/build/CMakeFiles/rebuild_cache.dir
