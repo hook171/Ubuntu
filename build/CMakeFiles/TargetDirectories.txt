@@ -1,2 +1,3 @@
-/home/hook/Documents/GitHub/Ubuntu/build/CMakeFiles/edit_cache.dir
-/home/hook/Documents/GitHub/Ubuntu/build/CMakeFiles/rebuild_cache.dir
+C:/Users/ARTEM/Documents/GitHub/Ubuntu/build/CMakeFiles/Ubuntu.dir
+C:/Users/ARTEM/Documents/GitHub/Ubuntu/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/ARTEM/Documents/GitHub/Ubuntu/build/CMakeFiles/ZERO_CHECK.dir
