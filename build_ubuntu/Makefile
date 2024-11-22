@@ -117,6 +117,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named process_launcher
+
+# Build rule for target.
+process_launcher: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 process_launcher
+.PHONY : process_launcher
+
+# fast build rule for target.
+process_launcher/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/process_launcher.dir/build.make CMakeFiles/process_launcher.dir/build
+.PHONY : process_launcher/fast
+
+#=============================================================================
 # Target rules for targets named Ubuntu
 
 # Build rule for target.
@@ -153,6 +166,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Ubuntu.dir/build.make CMakeFiles/Ubuntu.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+process_launcher.o: process_launcher.cpp.o
+.PHONY : process_launcher.o
+
+# target to build an object file
+process_launcher.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/process_launcher.dir/build.make CMakeFiles/process_launcher.dir/process_launcher.cpp.o
+.PHONY : process_launcher.cpp.o
+
+process_launcher.i: process_launcher.cpp.i
+.PHONY : process_launcher.i
+
+# target to preprocess a source file
+process_launcher.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/process_launcher.dir/build.make CMakeFiles/process_launcher.dir/process_launcher.cpp.i
+.PHONY : process_launcher.cpp.i
+
+process_launcher.s: process_launcher.cpp.s
+.PHONY : process_launcher.s
+
+# target to generate assembly for a file
+process_launcher.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/process_launcher.dir/build.make CMakeFiles/process_launcher.dir/process_launcher.cpp.s
+.PHONY : process_launcher.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,9 +199,13 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Ubuntu"
+	@echo "... process_launcher"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... process_launcher.o"
+	@echo "... process_launcher.i"
+	@echo "... process_launcher.s"
 .PHONY : help
 
 

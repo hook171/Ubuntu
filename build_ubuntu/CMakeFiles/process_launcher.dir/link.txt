@@ -1,0 +1,2 @@
+/usr/bin/ar qc libprocess_launcher.a CMakeFiles/process_launcher.dir/process_launcher.cpp.o
+/usr/bin/ranlib libprocess_launcher.a

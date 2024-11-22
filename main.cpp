@@ -7,7 +7,7 @@ int main() {
 #ifdef _WIN32
     command = "notepad.exe"; // Для Windows
 #else
-    command = "ls"; // Для Linux
+    command = "nano"; // Для Linux
 #endif
 
     int exitCode = ProcessLauncher::launchProcess(command);
