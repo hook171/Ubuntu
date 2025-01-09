@@ -2,8 +2,8 @@
 
 git pull origin main
 
-if not exist build_windows mkdir build_windows
-cd build_windows
+if not exist ..\build_windows mkdir ..\build_windows
+cd ..\build_windows
 
 cmake ..
 
