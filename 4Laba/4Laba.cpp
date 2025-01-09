@@ -42,7 +42,7 @@ public:
             dayData.erase(dayData.begin());
         }
 
-        logData("C:/Users/ARTEM/Documents/GitHub/Ubuntu/4Laba/measurements.log", std::to_string(temp));
+        logData("C:/Users/ARTEM/Documents/GitHub/Ubuntu/4Laba/Tests/measurements.log", std::to_string(temp));
     }
 
     // средняя температура
@@ -62,7 +62,7 @@ public:
         localtime_s(&t, &now);
         std::ostringstream oss;
         oss << std::put_time(&t, "%Y-%m-%d %H:%M:%S") << " Hourly Avg Temp: " << avgTemp;
-        logData("C:/Users/ARTEM/Documents/GitHub/Ubuntu/4Laba/hourly_average.log", oss.str());
+        logData("C:/Users/ARTEM/Documents/GitHub/Ubuntu/4Laba/Tests/hourly_average.log", oss.str());
     }
 
     // средняя температура за день
@@ -73,7 +73,7 @@ public:
         localtime_s(&t, &now);
         std::ostringstream oss;
         oss << std::put_time(&t, "%Y-%m-%d %H:%M:%S") << " Daily Avg Temp: " << avgTemp;
-        logData("C:/Users/ARTEM/Documents/GitHub/Ubuntu/4Laba/daily_average.log", oss.str());
+        logData("C:/Users/ARTEM/Documents/GitHub/Ubuntu/4Laba/Tests/daily_average.log", oss.str());
     }
 };
 

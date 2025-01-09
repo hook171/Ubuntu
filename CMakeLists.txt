@@ -6,15 +6,14 @@ project(Ubuntu)
 # Задаем стандарт C++
 set(CMAKE_CXX_STANDARD 11)
 
-# Добавляем настройки для разных лабораторных работ
-option(LAB2 "Build Lab 2" OFF)
-option(LAB4 "Build Lab 4" ON)
+# ставим ON там, какую лабу хотим запустить, на остальных OFF
+option(LAB2 "Build Lab 2" ON)
+option(LAB4 "Build Lab 4" OFF)
 
-# Выводим информацию о выбранных опциях
+# в bash выводится информация
 message(STATUS "LAB2 is set to ${LAB2}")
 message(STATUS "LAB4 is set to ${LAB4}")
 
-# Если выбрана Лаба 2
 if(LAB2)
     message(STATUS "Building Lab 2")
 
@@ -32,9 +31,9 @@ if(LAB2)
 
 endif()
 
-# Если выбрана Лаба 4
 if(LAB4)
 
+    #скрыл ошибки с localtime
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 
     message(STATUS "Building Lab 4")
