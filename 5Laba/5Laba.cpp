@@ -58,56 +58,97 @@ void initializeDatabase(sqlite3* db) {
 void runServer(sqlite3* db) {
     httplib::Server svr;
 
-    // Эндпоинт для получения текущей температуры
-    svr.Get("/temperature/current", [&](const httplib::Request&, httplib::Response& res) {
-        const char* query = "SELECT temperature FROM temperature ORDER BY id DESC LIMIT 1;";
+    // Эндпоинт для получения статистики
+    svr.Get("/temperature/data", [&](const httplib::Request& req, httplib::Response& res) {
+        std::ostringstream htmlContent;
+        htmlContent << "<html><head><meta charset=\"UTF-8\"><title>Температура</title></head><body>";
+        htmlContent << "<h1>Данные о температуре</h1>";
+
+        // Форма выбора периода
+        htmlContent << "<form action=\"/temperature/data\" method=\"get\">"
+                    << "<label for=\"period\">Выберите период:</label>"
+                    << "<select name=\"period\" id=\"period\">"
+                    << "<option value=\"hour\">Последний час</option>"
+                    << "<option value=\"day\">Последний день</option>"
+                    << "</select>"
+                    << "<input type=\"submit\" value=\"Показать статистику\">"
+                    << "</form>";
+
+        // Получаем параметр period из запроса
+        std::string period = req.get_param_value("period");
+
+        // Текущая температура
+        const char* currentTempQuery = "SELECT temperature FROM temperature ORDER BY id DESC LIMIT 1;";
         sqlite3_stmt* stmt;
-        if (sqlite3_prepare_v2(db, query, -1, &stmt, nullptr) != SQLITE_OK) {
+        if (sqlite3_prepare_v2(db, currentTempQuery, -1, &stmt, nullptr) != SQLITE_OK) {
             res.set_content("<html><head><meta charset=\"UTF-8\"></head><body><h1>Ошибка подготовки запроса</h1></body></html>", "text/html; charset=UTF-8");
             return;
         }
 
-        std::ostringstream htmlContent;
-        htmlContent << "<html><head><meta charset=\"UTF-8\"><title>Текущая температура</title></head><body>";
-        htmlContent << "<h1>Текущая температура</h1>";
-
+        htmlContent << "<h2>Текущая температура</h2>";
         if (sqlite3_step(stmt) == SQLITE_ROW) {
             float temp = sqlite3_column_double(stmt, 0);
-            htmlContent << "<p>Текущая температура: " << temp << "°C</p>";
+            htmlContent << "<p>" << temp << "°C</p>";
         } else {
             htmlContent << "<p>Нет данных</p>";
         }
 
-        htmlContent << "</body></html>";
-        res.set_content(htmlContent.str(), "text/html; charset=UTF-8");
-
         sqlite3_finalize(stmt);
-    });
 
-    // Эндпоинт для получения статистики (например, средней температуры)
-    svr.Get("/temperature/average", [&](const httplib::Request&, httplib::Response& res) {
-        const char* query = "SELECT AVG(temperature) FROM temperature;";
-        sqlite3_stmt* stmt;
-        if (sqlite3_prepare_v2(db, query, -1, &stmt, nullptr) != SQLITE_OK) {
+        // Средняя температура
+        const char* avgTempQuery;
+        if (period == "hour") {
+            avgTempQuery = "SELECT AVG(temperature) FROM temperature WHERE timestamp >= datetime('now', '-1 hour');";
+        } else if (period == "day") {
+            avgTempQuery = "SELECT AVG(temperature) FROM temperature WHERE timestamp >= datetime('now', '-1 day');";
+        } else {
+            avgTempQuery = "SELECT AVG(temperature) FROM temperature;";
+        }
+
+        if (sqlite3_prepare_v2(db, avgTempQuery, -1, &stmt, nullptr) != SQLITE_OK) {
             res.set_content("<html><head><meta charset=\"UTF-8\"></head><body><h1>Ошибка подготовки запроса</h1></body></html>", "text/html; charset=UTF-8");
             return;
         }
 
-        std::ostringstream htmlContent;
-        htmlContent << "<html><head><meta charset=\"UTF-8\"><title>Средняя температура</title></head><body>";
-        htmlContent << "<h1>Средняя температура</h1>";
-
+        htmlContent << "<h2>Средняя температура</h2>";
         if (sqlite3_step(stmt) == SQLITE_ROW) {
             float avgTemp = sqlite3_column_double(stmt, 0);
-            htmlContent << "<p>Средняя температура: " << avgTemp << "°C</p>";
+            htmlContent << "<p>" << avgTemp << "°C</p>";
         } else {
             htmlContent << "<p>Нет данных</p>";
         }
 
+        sqlite3_finalize(stmt);
+
+        // Таблица с данными о температуре
+        htmlContent << "<h2>История температур</h2>";
+        const char* tableQuery;
+        if (period == "hour") {
+            tableQuery = "SELECT timestamp, temperature FROM temperature WHERE timestamp >= datetime('now', '-1 hour') ORDER BY id DESC LIMIT 100;";
+        } else if (period == "day") {
+            tableQuery = "SELECT timestamp, temperature FROM temperature WHERE timestamp >= datetime('now', '-1 day') ORDER BY id DESC LIMIT 100;";
+        } else {
+            tableQuery = "SELECT timestamp, temperature FROM temperature ORDER BY id DESC LIMIT 10;";
+        }
+
+        if (sqlite3_prepare_v2(db, tableQuery, -1, &stmt, nullptr) != SQLITE_OK) {
+            res.set_content("<html><head><meta charset=\"UTF-8\"></head><body><h1>Ошибка подготовки запроса</h1></body></html>", "text/html; charset=UTF-8");
+            return;
+        }
+
+        htmlContent << "<table border=\"1\"><tr><th>Время</th><th>Температура</th></tr>";
+        while (sqlite3_step(stmt) == SQLITE_ROW) {
+            const char* timestamp = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0));
+            float temperature = sqlite3_column_double(stmt, 1);
+            htmlContent << "<tr><td>" << timestamp << "</td><td>" << temperature << "°C</td></tr>";
+        }
+        htmlContent << "</table>";
+
+        sqlite3_finalize(stmt);
+
         htmlContent << "</body></html>";
         res.set_content(htmlContent.str(), "text/html; charset=UTF-8");
 
-        sqlite3_finalize(stmt);
     });
 
     svr.listen("localhost", 8080);
@@ -146,7 +187,7 @@ int main() {
             logger.addTemperature(temp);
 
             // Пауза в 1 минуту между измерениями
-            std::this_thread::sleep_for(std::chrono::seconds(1));
+            std::this_thread::sleep_for(std::chrono::minutes(1)); // в таблице данные с ежесекундным обновлением, для теста
         }
     });
 
@@ -155,10 +196,9 @@ int main() {
         runServer(db);
     });
 
-    // Открываем вкладки в браузере
+    // Открываем вкладку в браузере
     std::this_thread::sleep_for(std::chrono::seconds(1)); // Даем время серверу запуститься
-    std::system("start http://localhost:8080/temperature/current");
-    std::system("start http://localhost:8080/temperature/average");
+    std::system("start http://localhost:8080/temperature/data");
 
     // Дожидаемся завершения потоков
     dataThread.join();
@@ -169,4 +209,3 @@ int main() {
 
     return 0;
 }
-
