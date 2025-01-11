@@ -1,12 +1,19 @@
+#!/bin/bash
+
 git pull origin main
 
-if [ ! -d "../build_ubuntu" ]; then
-  mkdir ../build_ubuntu
-fi
+LABS=("2Laba" "4Laba" "5Laba")
 
-cd ../build_ubuntu
+for LAB in "${LABS[@]}"; do
 
-cmake ..
-cmake --build .
+  if [ ! -d "../$LAB/build_ubuntu" ]; then
+    mkdir -p "../$LAB/build_ubuntu"
+  fi
 
-./Ubuntu
+  cd "../$LAB/build_ubuntu"
+
+  cmake ..
+  cmake --build .
+
+  cd ../../$LAB
+done

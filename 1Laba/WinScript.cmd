@@ -2,14 +2,19 @@
 
 git pull origin main
 
-if not exist ..\build_windows mkdir ..\build_windows
-cd ..\build_windows
+set LABS=2Laba 4Laba 5Laba
 
-cmake ..
+for  %%L in (%LABS%) do (
 
-cmake --build .
+    if not exist ..\%%L\build_windows mkdir ..\%%L\build_windows
+    cd ..\%%L\build_windows
 
-cd Debug
+    cmake ..
 
-Ubuntu.exe
+    cmake --build .
+
+    cd ..\..\%%L
+
+)
+
 pause 0

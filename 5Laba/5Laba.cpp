@@ -118,12 +118,17 @@ float simulateTemperature() {
     return 15.0 + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (30.0 - 15.0)));
 }
 
+#include <cstdlib> // Для std::system
+
 int main() {
     srand(time(0));
 
+    // Путь к базе данных
+    const char* dbPath = "C:/Users/ARTEM/Documents/GitHub/Ubuntu/5Laba/temperature.db";
+
     // Открываем базу данных
     sqlite3* db;
-    if (sqlite3_open("temperature.db", &db) != SQLITE_OK) {
+    if (sqlite3_open(dbPath, &db) != SQLITE_OK) {
         std::cerr << "Ошибка открытия базы данных: " << sqlite3_errmsg(db) << std::endl;
         return 1;
     }
@@ -145,14 +150,23 @@ int main() {
         }
     });
 
-    // Запускаем сервер
-    runServer(db);
+    // Запускаем сервер в отдельном потоке
+    std::thread serverThread([&]() {
+        runServer(db);
+    });
 
-    // Дожидаемся завершения потока
+    // Открываем вкладки в браузере
+    std::this_thread::sleep_for(std::chrono::seconds(1)); // Даем время серверу запуститься
+    std::system("start http://localhost:8080/temperature/current");
+    std::system("start http://localhost:8080/temperature/average");
+
+    // Дожидаемся завершения потоков
     dataThread.join();
+    serverThread.join();
 
     // Закрываем базу данных
     sqlite3_close(db);
 
     return 0;
 }
+

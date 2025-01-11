@@ -1,0 +1,3 @@
+C:/Users/ARTEM/Documents/GitHub/Ubuntu/4Laba/build_windows/CMakeFiles/Ubuntu.dir
+C:/Users/ARTEM/Documents/GitHub/Ubuntu/4Laba/build_windows/CMakeFiles/ALL_BUILD.dir
+C:/Users/ARTEM/Documents/GitHub/Ubuntu/4Laba/build_windows/CMakeFiles/ZERO_CHECK.dir
