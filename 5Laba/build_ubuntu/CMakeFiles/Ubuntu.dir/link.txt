@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/Ubuntu.dir/link.d CMakeFiles/Ubuntu.dir/5Laba.cpp.o -o Ubuntu   -L/home/hook/Documents/GitHub/Ubuntu/5Laba/Libs/SQLite  -Wl,-rpath,/home/hook/Documents/GitHub/Ubuntu/5Laba/Libs/SQLite -lsqlite3

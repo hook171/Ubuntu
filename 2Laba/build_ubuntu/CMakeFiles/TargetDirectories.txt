@@ -1,0 +1,4 @@
+/home/hook/Documents/GitHub/Ubuntu/2Laba/build_ubuntu/CMakeFiles/process_launcher.dir
+/home/hook/Documents/GitHub/Ubuntu/2Laba/build_ubuntu/CMakeFiles/Ubuntu.dir
+/home/hook/Documents/GitHub/Ubuntu/2Laba/build_ubuntu/CMakeFiles/edit_cache.dir
+/home/hook/Documents/GitHub/Ubuntu/2Laba/build_ubuntu/CMakeFiles/rebuild_cache.dir

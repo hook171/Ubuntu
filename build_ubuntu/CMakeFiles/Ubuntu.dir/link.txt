@@ -1,1 +1,0 @@
-/usr/bin/c++ -Wl,--dependency-file,CMakeFiles/Ubuntu.dir/link.d CMakeFiles/Ubuntu.dir/main.cpp.o -o Ubuntu  libprocess_launcher.a

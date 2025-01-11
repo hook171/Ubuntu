@@ -59,7 +59,7 @@ public:
         float avgTemp = calculateAverage(hourData);
         std::time_t now = std::time(0);
         struct tm t;
-        localtime_s(&t, &now);
+        localtime_r(&now, &t);
         std::ostringstream oss;
         oss << std::put_time(&t, "%Y-%m-%d %H:%M:%S") << " Hourly Avg Temp: " << avgTemp;
         logData("C:/Users/ARTEM/Documents/GitHub/Ubuntu/4Laba/Tests/hourly_average.log", oss.str());
@@ -70,7 +70,7 @@ public:
         float avgTemp = calculateAverage(dayData);
         std::time_t now = std::time(0);
         struct tm t;
-        localtime_s(&t, &now);
+        localtime_r(&now, &t);
         std::ostringstream oss;
         oss << std::put_time(&t, "%Y-%m-%d %H:%M:%S") << " Daily Avg Temp: " << avgTemp;
         logData("C:/Users/ARTEM/Documents/GitHub/Ubuntu/4Laba/Tests/daily_average.log", oss.str());
