@@ -2,7 +2,7 @@
 
 git pull origin main
 
-set LABS=2Laba 4Laba 5Laba
+set LABS=1Laba 2Laba
 
 for  %%L in (%LABS%) do (
 

@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\ARTEM\Documents\GitHub\Ubuntu\2Laba\2Laba.cpp">
+    <ClCompile Include="C:\Users\hook\Documents\GitHub\Ubuntu\2Laba\2Laba.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\ARTEM\Documents\GitHub\Ubuntu\2Laba\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\hook\Documents\GitHub\Ubuntu\2Laba\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{96DC430B-7FBD-3B12-97AF-89CE07A62CC9}</UniqueIdentifier>
+      <UniqueIdentifier>{44DD5559-8B88-3F08-9A90-F99FB536B702}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

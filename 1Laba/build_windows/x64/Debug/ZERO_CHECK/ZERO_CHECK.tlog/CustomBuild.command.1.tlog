@@ -1,0 +1,10 @@
+^C:\USERS\HOOK\DOCUMENTS\GITHUB\UBUNTU\1LABA\BUILD_WINDOWS\CMAKEFILES\656C5CAE6FC436CB5A461CE304B9BDCA\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/hook/Documents/GitHub/Ubuntu/1Laba -BC:/Users/hook/Documents/GitHub/Ubuntu/1Laba/build_windows --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/hook/Documents/GitHub/Ubuntu/1Laba/build_windows/Ubuntu.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

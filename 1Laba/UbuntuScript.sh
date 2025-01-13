@@ -2,7 +2,7 @@
 
 git pull origin main
 
-LABS=("2Laba" "4Laba" "5Laba")
+LABS=("1Laba" "2Laba")
 
 for LAB in "${LABS[@]}"; do
 

@@ -1,4 +1,4 @@
-C:/Users/ARTEM/Documents/GitHub/Ubuntu/2Laba/build_windows/CMakeFiles/process_launcher.dir
-C:/Users/ARTEM/Documents/GitHub/Ubuntu/2Laba/build_windows/CMakeFiles/Ubuntu.dir
-C:/Users/ARTEM/Documents/GitHub/Ubuntu/2Laba/build_windows/CMakeFiles/ALL_BUILD.dir
-C:/Users/ARTEM/Documents/GitHub/Ubuntu/2Laba/build_windows/CMakeFiles/ZERO_CHECK.dir
+C:/Users/hook/Documents/GitHub/Ubuntu/2Laba/build_windows/CMakeFiles/process_launcher.dir
+C:/Users/hook/Documents/GitHub/Ubuntu/2Laba/build_windows/CMakeFiles/Ubuntu.dir
+C:/Users/hook/Documents/GitHub/Ubuntu/2Laba/build_windows/CMakeFiles/ALL_BUILD.dir
+C:/Users/hook/Documents/GitHub/Ubuntu/2Laba/build_windows/CMakeFiles/ZERO_CHECK.dir

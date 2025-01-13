@@ -1,6 +1,6 @@
-^C:\USERS\ARTEM\DOCUMENTS\GITHUB\UBUNTU\5LABA\CMAKELISTS.TXT
+^C:\USERS\HOOK\DOCUMENTS\GITHUB\UBUNTU\5LABA\CMAKELISTS.TXT
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ARTEM/Documents/GitHub/Ubuntu/5Laba -BC:/Users/ARTEM/Documents/GitHub/Ubuntu/5Laba/build_windows --check-stamp-file C:/Users/ARTEM/Documents/GitHub/Ubuntu/5Laba/build_windows/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/hook/Documents/GitHub/Ubuntu/5Laba -BC:/Users/hook/Documents/GitHub/Ubuntu/5Laba/build_windows --check-stamp-file C:/Users/hook/Documents/GitHub/Ubuntu/5Laba/build_windows/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
