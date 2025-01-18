@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\ARTEM\Documents\GitHub\Ubuntu\1Laba\1Laba.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ARTEM\Documents\GitHub\Ubuntu\1Laba\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{E41B1E2B-D111-391C-90F6-B9830B5F5009}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

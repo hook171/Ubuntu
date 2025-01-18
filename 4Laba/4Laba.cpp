@@ -7,7 +7,7 @@
 #include <sstream>
 #include <iomanip>
 #include <cstdlib>
-#include <cctype> // для std::isdigit
+#include <cctype>  // для std::isdigit
 #include "my_serial.hpp"
 
 // Функция для очистки строки от нечитаемых символов
@@ -23,14 +23,15 @@ std::string cleanString(const std::string& input) {
 
 class TemperatureLogger {
 private:
-    std::vector<float> measurements; // Хранит последние 24 * 60 измерений
-    std::vector<float> hourlyAverages; // Хранит последние 24 * 30 средних за час
-    std::vector<float> dailyAverages; // Хранит последние 365 средних за день
+    std::vector<float> measurements;  // Хранит последние 24 * 60 измерений
+    std::vector<float> hourlyAverages;  // Хранит последние 24 * 30 средних за час
+    std::vector<float> dailyAverages;  // Хранит последние 365 средних за день
 
-    const int measurementsLimit = 24 * 60; // 1440 измерений (24 часа * 60 минут)
-    const int hourlyAveragesLimit = 24 * 30; // 720 средних за час (30 дней * 24 часа)
-    const int dailyAveragesLimit = 365; // 365 средних за день (1 год)
+    const int measurementsLimit = 24 * 60;  // 1440 измерений (24 часа * 60 минут)
+    const int hourlyAveragesLimit = 24 * 30;  // 720 средних за час (30 дней * 24 часа)
+    const int dailyAveragesLimit = 365;  // 365 средних за день (1 год)
 
+    // Логирование данных в файл
     void logData(const std::string &fileName, const std::string &data) {
         std::ofstream outFile(fileName, std::ios::app);
         if (outFile.is_open()) {
@@ -38,22 +39,23 @@ private:
             outFile.close();
             std::cout << "Data written to: " << fileName << std::endl;
         } else {
-            std::cerr << "Error open file: " << fileName << std::endl;
+            std::cerr << "Error opening file: " << fileName << std::endl;
         }
     }
 
 public:
+    // Добавление температуры в лог
     void addTemperature(float temp) {
-        // Добавляем температуру в measurements
         measurements.push_back(temp);
         if (measurements.size() > measurementsLimit) {
             measurements.erase(measurements.begin());
         }
 
         // Логируем текущее измерение
-        logData("C:/Users/hook/Documents/GitHub/Ubuntu/4Laba/Tests/measurements.log", std::to_string(temp));
+        logData("C:/Users/ARTEM/Documents/GitHub/Ubuntu/4Laba/Tests/measurements.log", std::to_string(temp));
     }
 
+    // Вычисление среднего значения
     float calculateAverage(const std::vector<float> &data) {
         float sum = 0;
         for (float temp : data) {
@@ -62,8 +64,9 @@ public:
         return data.empty() ? 0 : sum / data.size();
     }
 
+    // Логирование среднего за час
     void logHourlyAverage() {
-        float avgTemp = calculateAverage(measurements); // Среднее за последний час
+        float avgTemp = calculateAverage(measurements);  // Среднее за последний час
         hourlyAverages.push_back(avgTemp);
         if (hourlyAverages.size() > hourlyAveragesLimit) {
             hourlyAverages.erase(hourlyAverages.begin());
@@ -71,18 +74,19 @@ public:
 
         std::time_t now = std::time(0);
         struct tm t;
-        #ifdef _WIN32
-            localtime_s(&t, &now);
-        #else
-            localtime_r(&now, &t);
-        #endif
+#ifdef _WIN32
+        localtime_s(&t, &now);
+#else
+        localtime_r(&now, &t);
+#endif
         std::ostringstream oss;
         oss << std::put_time(&t, "%Y-%m-%d %H:%M:%S") << " Hourly Avg Temp: " << avgTemp;
-        logData("C:/Users/hook/Documents/GitHub/Ubuntu/4Laba/Tests/hourly_average.log", oss.str());
+        logData("C:/Users/ARTEM/Documents/GitHub/Ubuntu/4Laba/Tests/hourly_average.log", oss.str());
     }
 
+    // Логирование среднего за день
     void logDailyAverage() {
-        float avgTemp = calculateAverage(hourlyAverages); // Среднее за последний день
+        float avgTemp = calculateAverage(hourlyAverages);  // Среднее за последний день
         dailyAverages.push_back(avgTemp);
         if (dailyAverages.size() > dailyAveragesLimit) {
             dailyAverages.erase(dailyAverages.begin());
@@ -90,14 +94,14 @@ public:
 
         std::time_t now = std::time(0);
         struct tm t;
-        #ifdef _WIN32
-            localtime_s(&t, &now);
-        #else
-            localtime_r(&now, &t);
-        #endif
+#ifdef _WIN32
+        localtime_s(&t, &now);
+#else
+        localtime_r(&now, &t);
+#endif
         std::ostringstream oss;
         oss << std::put_time(&t, "%Y-%m-%d %H:%M:%S") << " Daily Avg Temp: " << avgTemp;
-        logData("C:/Users/hook/Documents/GitHub/Ubuntu/4Laba/Tests/daily_average.log", oss.str());
+        logData("C:/Users/ARTEM/Documents/GitHub/Ubuntu/4Laba/Tests/daily_average.log", oss.str());
     }
 };
 
@@ -108,59 +112,62 @@ int main(int argc, char** argv) {
     }
 
     TemperatureLogger logger;
+
+    // Открываем COM-порт
     cplib::SerialPort serialPort(argv[1], cplib::SerialPort::BAUDRATE_115200);
     if (!serialPort.IsOpen()) {
         std::cerr << "Failed to open port " << argv[1] << std::endl;
         return -1;
     }
 
-    std::string line;
-    int count = 0;
+    std::cout << "Port " << argv[1] << " opened successfully." << std::endl;
+
+    // Устанавливаем таймаут для чтения
+    serialPort.SetTimeout(1.0);  // Таймаут 1 секунда
+
+    int count = 0;  // Счётчик полученных значений
 
     while (true) {
-        char buffer[256];
+        char buffer[256];  // Буфер на 256 байт
         size_t read = 0;
-        if (serialPort.Read(buffer, sizeof(buffer) - 1, &read) == cplib::SerialPort::RE_OK) {
-            buffer[read] = '\0'; // Добавляем завершающий нулевой символ
-            line += buffer;
 
-            // Проверяем, есть ли в строке символ новой строки
-            size_t pos = line.find('\n');
-            if (pos != std::string::npos) {
-                std::string completeLine = line.substr(0, pos);
-                line.erase(0, pos + 1); // Удаляем обработанную строку
+        // Читаем данные из порта
+        int result = serialPort.Read(buffer, sizeof(buffer) - 1, &read);
+        if (result == cplib::SerialPort::RE_OK) {
+            buffer[read] = '\0';  // Добавляем нулевой символ для корректного вывода строки
+            std::string data(buffer);
 
-                // Обрабатываем строку
-                if (!completeLine.empty()) {
-                    completeLine = cleanString(completeLine);
-                    std::cout << "Received: " << completeLine << std::endl;
+            // Очищаем данные от нечитаемых символов
+            std::string cleanData = cleanString(data);
+            std::cout << "Received: " << cleanData << std::endl;
 
-                    try {
-                        float temp = std::stof(completeLine);
-                        logger.addTemperature(temp);
-                        count++;
+            try {
+                // Преобразуем данные в число
+                float temp = std::stof(cleanData);
 
-                        // Логируем среднее за каждый час
-                        if (count % 60 == 0) {
-                            logger.logHourlyAverage();
-                        }
+                // Добавляем температуру в лог
+                logger.addTemperature(temp);
+                count++;
 
-                        // Логируем среднее за каждый день
-                        if (count % 1440 == 0) {
-                            logger.logDailyAverage();
-                        }
-                    } catch (const std::invalid_argument& e) {
-                        std::cerr << "Error converting string to float: " << completeLine << std::endl;
-                    }
+                // Логируем среднее за каждый час
+                if (count % 60 == 0) {
+                    logger.logHourlyAverage();
                 }
+
+                // Логируем среднее за каждый день
+                if (count % 1440 == 0) {
+                    logger.logDailyAverage();
+                }
+            } catch (const std::invalid_argument& e) {
+                std::cerr << "Error converting string to float: " << cleanData << std::endl;
             }
+        } else {
+            std::cerr << "Read failed with error code: " << result << std::endl;
         }
 
         // Пауза между измерениями
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
-    std::cout << "Press Enter to exit...";
-    std::cin.get();  // Ожидание нажатия Enter
     return 0;
 }

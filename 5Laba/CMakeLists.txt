@@ -1,28 +1,27 @@
 cmake_minimum_required(VERSION 3.10)
+project(5Laba)
 
-project(Ubuntu)
+set(CMAKE_CXX_STANDARD 17)
 
-set(CMAKE_CXX_STANDARD 11)
+# Указываем пути к заголовочным файлам
+include_directories(
+    ${CMAKE_SOURCE_DIR}/Libs/cpp-httplib-master
+    ${CMAKE_SOURCE_DIR}/Libs/SQLite
+)
 
-message(STATUS "Building Lab 5")
+# Указываем путь к библиотеке SQLite
+set(SQLITE_LIB_DIR "${CMAKE_SOURCE_DIR}/Libs/SQLite")
+set(SQLITE_LIB "${SQLITE_LIB_DIR}/sqlite3.lib")
 
-add_executable(Ubuntu 5Laba.cpp)
+# Основной исполняемый файл
+add_executable(5Laba
+    5Laba.cpp
+    db/db_handler.cpp
+    http/server.cpp
+)
+add_executable(temperature_simulator
+    temperature_simulator.cpp
+)
 
-# Указываем путь к заголовочным файлам
-target_include_directories(Ubuntu PRIVATE ${CMAKE_SOURCE_DIR}/Libs/SQLite)
-target_include_directories(Ubuntu PRIVATE ${CMAKE_SOURCE_DIR}/Libs/cpp-httplib-master)
-
-    # Указываем путь к библиотекам SQLite
-target_link_directories(Ubuntu PRIVATE ${CMAKE_SOURCE_DIR}/Libs/SQLite)
-
-    # Линкуем с SQLite
-target_link_libraries(Ubuntu sqlite3)
-
-    # Копируем DLL в папку с результатом сборки (только для Windows)
-    if(WIN32)
-        add_custom_command(TARGET Ubuntu POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            ${CMAKE_SOURCE_DIR}/Libs/SQLite/sqlite3.dll
-            $<TARGET_FILE_DIR:Ubuntu>)
-
-    endif()
+# Подключаем библиотеку SQLite
+target_link_libraries(5Laba PRIVATE ${SQLITE_LIB})

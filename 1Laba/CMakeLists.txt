@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(Ubuntu)
+project(1Laba)
 
 set(CMAKE_CXX_STANDARD 11)
 
@@ -8,4 +8,4 @@ message(STATUS "Building Lab 1")
 
 include_directories(1Laba)
 
-add_executable(Ubuntu 1Laba.cpp)
+add_executable(1Laba 1Laba.cpp)

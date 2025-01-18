@@ -1,6 +1,6 @@
-^C:\USERS\HOOK\DOCUMENTS\GITHUB\UBUNTU\2LABA\BUILD_WINDOWS\CMAKEFILES\FE3D63B450625E678A07A940705603CD\GENERATE.STAMP.RULE
+^C:\USERS\ARTEM\DOCUMENTS\GITHUB\UBUNTU\2LABA\BUILD_WINDOWS\CMAKEFILES\0C14963CD9CAC9960A4506BB7899B3EF\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/hook/Documents/GitHub/Ubuntu/2Laba -BC:/Users/hook/Documents/GitHub/Ubuntu/2Laba/build_windows --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/hook/Documents/GitHub/Ubuntu/2Laba/build_windows/Ubuntu.sln
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ARTEM/Documents/GitHub/Ubuntu/2Laba -BC:/Users/ARTEM/Documents/GitHub/Ubuntu/2Laba/build_windows --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/ARTEM/Documents/GitHub/Ubuntu/2Laba/build_windows/2Laba.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

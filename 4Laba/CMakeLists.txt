@@ -10,4 +10,6 @@ message(STATUS "Building Lab 4")
 
 include_directories(4Laba)
 
-add_executable(Ubuntu 4Laba.cpp)
+add_executable(4Laba 4Laba.cpp)
+
+add_executable(temperature_simulator temperature_simulator.cpp)

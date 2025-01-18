@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Monitor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input {
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Temperature Monitor</h1>
+        <label for="start">Start Date:</label>
+        <input type="datetime-local" id="start" name="start">
+        <label for="end">End Date:</label>
+        <input type="datetime-local" id="end" name="end">
+        <button onclick="fetchData()">Get Statistics</button>
+
+        <div class="result" id="result">
+            <!-- Здесь будут отображаться результаты -->
+        </div>
+    </div>
+
+    <script>
+        async function fetchData() {
+            const start = document.getElementById('start').value;
+            const end = document.getElementById('end').value;
+
+            if (!start || !end) {
+                alert('Please select both start and end dates.');
+                return;
+            }
+
+            const response = await fetch(`/stats?start=${start}&end=${end}`);
+            const data = await response.json();
+
+            const resultDiv = document.getElementById('result');
+            if (data.error) {
+                resultDiv.innerHTML = `<p style="color: red;">Error: ${data.error}</p>`;
+            } else {
+                resultDiv.innerHTML = `
+                    <p><strong>Min Temperature:</strong> ${data.min} °C</p>
+                    <p><strong>Max Temperature:</strong> ${data.max} °C</p>
+                    <p><strong>Average Temperature:</strong> ${data.avg} °C</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

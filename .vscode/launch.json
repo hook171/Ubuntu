@@ -1,0 +1,147 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug 1Laba",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/1Laba/build_windows/Debug/1Laba.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/1Laba/build_windows/Debug",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Run CMD Script"
+        },
+        {
+            "name": "Debug 2Laba",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/2Laba/build_windows/Debug/2Laba.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/2Laba/build_windows/Debug",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Run CMD Script"
+        },
+        {
+            "name": "Debug 4Laba (COM3)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/4Laba/build_windows/Debug/4Laba.exe",
+            "args": ["COM3"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/4Laba/build_windows/Debug",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Run CMD Script"
+        },
+        {
+            "name": "Debug Temperature Simulator (COM4)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/4Laba/build_windows/Debug/temperature_simulator.exe",
+            "args": ["COM4"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/4Laba/build_windows/Debug",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Run CMD Script"
+        },
+        {
+            "name": "Debug 5Laba (COM4)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/5Laba/build_windows/Debug/5Laba.exe",
+            "args": ["COM4"], // Передаем COM-порт как аргумент
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/5Laba/build_windows/Debug",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Run CMD Script" // Задача, которая запускается перед отладкой
+        },
+        {
+            "name": "Debug Temperature Simulator (COM3)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/5Laba/build_windows/Debug/temperature_simulator.exe",
+            "args": ["COM3"], // Передаем COM-порт как аргумент
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/5Laba/build_windows/Debug",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Run CMD Script" // Задача, которая запускается перед отладкой
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Debug 4Laba and Temperature Simulator",
+            "configurations": [
+                "Debug 4Laba (COM3)",
+                "Debug Temperature Simulator (COM4)"
+            ]
+        },
+        {
+            "name": "Debug 5Laba and Temperature Simulator",
+            "configurations": [
+                "Debug 5Laba (COM4)",
+                "Debug Temperature Simulator (COM3)"
+            ]
+        }
+    ]
+}

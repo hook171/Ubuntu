@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(Ubuntu)
+project(2Laba)
 
 set(CMAKE_CXX_STANDARD 11)
 
@@ -10,6 +10,6 @@ include_directories(2Laba)
 
 add_library(process_launcher STATIC process_launcher.cpp)
 
-add_executable(Ubuntu 2Laba.cpp)
+add_executable(2Laba 2Laba.cpp)
 
-target_link_libraries(Ubuntu process_launcher)
+target_link_libraries(2Laba process_launcher)

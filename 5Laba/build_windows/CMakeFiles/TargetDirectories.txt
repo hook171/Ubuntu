@@ -1,3 +1,4 @@
-C:/Users/hook/Documents/GitHub/Ubuntu/5Laba/build_windows/CMakeFiles/Ubuntu.dir
-C:/Users/hook/Documents/GitHub/Ubuntu/5Laba/build_windows/CMakeFiles/ALL_BUILD.dir
-C:/Users/hook/Documents/GitHub/Ubuntu/5Laba/build_windows/CMakeFiles/ZERO_CHECK.dir
+C:/Users/ARTEM/Documents/GitHub/Ubuntu/5Laba/build_windows/CMakeFiles/5Laba.dir
+C:/Users/ARTEM/Documents/GitHub/Ubuntu/5Laba/build_windows/CMakeFiles/temperature_simulator.dir
+C:/Users/ARTEM/Documents/GitHub/Ubuntu/5Laba/build_windows/CMakeFiles/ALL_BUILD.dir
+C:/Users/ARTEM/Documents/GitHub/Ubuntu/5Laba/build_windows/CMakeFiles/ZERO_CHECK.dir
