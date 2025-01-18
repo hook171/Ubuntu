@@ -3,7 +3,12 @@ async function fetchCurrentTemperature() {
     try {
         const response = await fetch('/current');
         const data = await response.json();
-        document.getElementById('currentTemp').textContent = `${data.temperature} °C`;
+
+        if (data.error) {
+            document.getElementById('currentTemp').textContent = 'Error loading data';
+        } else {
+            document.getElementById('currentTemp').textContent = `${data.temperature} °C`;
+        }
     } catch (error) {
         console.error('Error fetching current temperature:', error);
         document.getElementById('currentTemp').textContent = 'Error loading data';
@@ -42,3 +47,6 @@ setInterval(fetchCurrentTemperature, 5000);
 
 // Загружаем текущую температуру при запуске
 fetchCurrentTemperature();
+
+// Назначаем обработчик на кнопку для получения статистики
+document.getElementById('fetchStatsButton').addEventListener('click', fetchStatistics);

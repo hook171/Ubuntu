@@ -58,7 +58,7 @@ void runHttpServer() {
     httplib::Server svr;
 
     // Настройка эндпоинтов
-    svr.set_mount_point("/", "./web-service");
+    svr.set_mount_point("/", "C:/Users/ARTEM/Documents/GitHub/Ubuntu/5Laba/web-service");
     svr.Get("/current", [](const httplib::Request&, httplib::Response& res) {
         res.set_content(get_current_temperature(), "application/json");
     });

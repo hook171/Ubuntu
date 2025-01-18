@@ -1,13 +1,34 @@
+#include <winsock2.h> // Подключаем winsock2.h до windows.h
+#include <windows.h>
+#include <sqlite3.h>
+#include <httplib.h>
 #include <iostream>
+#include <chrono>
 #include <thread>
-#include <windows.h> // Для ShellExecute
-#include "my_serial.hpp"
-#include "db/db_handler.h"
-#include "http/server.h"
+#include <vector>
+#include <sstream>
+#include <iomanip>
+#include <cstdlib>
+#include <cctype>
+#include "my_serial.hpp" // Оставляем, если это заголовочный файл
+#include "db/db_handler.h" // Подключаем заголовочный файл для работы с базой данных
+#include "http/server.h"   // Подключаем заголовочный файл для HTTP-сервера
 
-// Функция для открытия браузера
-void openBrowser(const std::string& url) {
-    ShellExecute(NULL, "open", url.c_str(), NULL, NULL, SW_SHOWNORMAL);
+// Функция для очистки строки от нечитаемых символов
+std::string cleanString(const std::string& input) {
+    std::string result;
+    for (char ch : input) {
+        if (std::isdigit(ch) || ch == '.' || ch == '-') {
+            result += ch;
+        }
+    }
+    return result;
+}
+
+// Функция для запуска HTTP-сервера в отдельном потоке
+void startHttpServer() {
+    std::cout << "Starting HTTP server..." << std::endl;
+    runHttpServer(); // Функция из http/server.cpp
 }
 
 int main(int argc, char** argv) {
@@ -20,11 +41,8 @@ int main(int argc, char** argv) {
     init_db();
 
     // Запуск HTTP-сервера в отдельном потоке
-    std::thread httpThread(runHttpServer);
-    httpThread.detach();
-
-    // Открываем браузер с нужным URL
-    openBrowser("http://localhost:8080");
+    std::thread httpThread(startHttpServer);
+    httpThread.detach(); // Отделяем поток, чтобы он работал независимо
 
     // Открываем COM-порт
     cplib::SerialPort serialPort(argv[1], cplib::SerialPort::BAUDRATE_115200);
@@ -62,15 +80,6 @@ int main(int argc, char** argv) {
                 write_temperature(temp);
                 count++;
 
-                // Логируем среднее за каждый час (опционально)
-                if (count % 60 == 0) {
-                    std::cout << "Logged hourly average." << std::endl;
-                }
-
-                // Логируем среднее за каждый день (опционально)
-                if (count % 1440 == 0) {
-                    std::cout << "Logged daily average." << std::endl;
-                }
             } catch (const std::invalid_argument& e) {
                 std::cerr << "Error converting string to float: " << cleanData << std::endl;
             }
