@@ -10,6 +10,12 @@
 #include <cctype>  // для std::isdigit
 #include "my_serial.hpp"
 
+#ifdef _WIN32
+    #define LOG_FILE_PATH "C:/Users/ARTEM/Documents/GitHub/Ubuntu/4Laba/Tests/measurements.log"
+#else
+    #define LOG_FILE_PATH "/home/hook/Documents/GitHub/Ubuntu/4Laba/Tests/measurements.log"
+#endif
+
 // Функция для очистки строки от нечитаемых символов
 std::string cleanString(const std::string& input) {
     std::string result;
@@ -52,7 +58,7 @@ public:
         }
 
         // Логируем текущее измерение
-        logData("C:/Users/ARTEM/Documents/GitHub/Ubuntu/4Laba/Tests/measurements.log", std::to_string(temp));
+        logData(LOG_FILE_PATH, std::to_string(temp));
     }
 
     // Вычисление среднего значения
@@ -81,7 +87,7 @@ public:
 #endif
         std::ostringstream oss;
         oss << std::put_time(&t, "%Y-%m-%d %H:%M:%S") << " Hourly Avg Temp: " << avgTemp;
-        logData("C:/Users/ARTEM/Documents/GitHub/Ubuntu/4Laba/Tests/hourly_average.log", oss.str());
+        logData(LOG_FILE_PATH, oss.str());
     }
 
     // Логирование среднего за день
@@ -101,7 +107,7 @@ public:
 #endif
         std::ostringstream oss;
         oss << std::put_time(&t, "%Y-%m-%d %H:%M:%S") << " Daily Avg Temp: " << avgTemp;
-        logData("C:/Users/ARTEM/Documents/GitHub/Ubuntu/4Laba/Tests/daily_average.log", oss.str());
+        logData(LOG_FILE_PATH, oss.str());
     }
 };
 

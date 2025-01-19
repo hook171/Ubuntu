@@ -1,0 +1,4 @@
+/home/hook/Documents/GitHub/Ubuntu/4Laba/build_ubuntu/CMakeFiles/4Laba.dir
+/home/hook/Documents/GitHub/Ubuntu/4Laba/build_ubuntu/CMakeFiles/temperature_simulator.dir
+/home/hook/Documents/GitHub/Ubuntu/4Laba/build_ubuntu/CMakeFiles/edit_cache.dir
+/home/hook/Documents/GitHub/Ubuntu/4Laba/build_ubuntu/CMakeFiles/rebuild_cache.dir

@@ -25,12 +25,39 @@
                 "/c",
                 "${workspaceFolder}/1Laba/WinScript.cmd" // Путь к скрипту в текущей папке
             ],
+            "windows": {
+                "command": "cmd.exe",
+                "args": [
+                    "/c",
+                    "${workspaceFolder}/1Laba/WinScript.cmd"
+                ]
+            },
+            "linux": {
+                "command": "bash",
+                "args": [
+                    "${workspaceFolder}/1Laba/UbuntuScript.sh"
+                ]
+            },
             "group": {
                 "kind": "build",
                 "isDefault": false
             },
             "problemMatcher": [],
-            "detail": "Запуск CMD-скрипта из текущей папки"
+            "detail": "Запуск скрипта в зависимости от ОС"
+        },
+        {
+            "label": "Run Ubuntu Script",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "${workspaceFolder}/1Laba/UbuntuScript.sh"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+            "detail": "Запуск Ubuntu-скрипта"
         }
     ]
 }

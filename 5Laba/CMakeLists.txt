@@ -9,19 +9,33 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/Libs/SQLite
 )
 
-# Указываем путь к библиотеке SQLite
-set(SQLITE_LIB_DIR "${CMAKE_SOURCE_DIR}/Libs/SQLite")
-set(SQLITE_LIB "${SQLITE_LIB_DIR}/sqlite3.lib")
-
 # Основной исполняемый файл
 add_executable(5Laba
     5Laba.cpp
     db/db_handler.cpp
     http/server.cpp
 )
+
+# Исполняемый файл для симулятора температуры
 add_executable(temperature_simulator
     temperature_simulator.cpp
 )
 
-# Подключаем библиотеку SQLite
-target_link_libraries(5Laba PRIVATE ${SQLITE_LIB})
+# Подключение библиотек в зависимости от ОС
+if (WIN32)
+    # Настройки для Windows
+    set(SQLITE_LIB "${CMAKE_SOURCE_DIR}/Libs/SQLite/sqlite3.lib")
+    target_link_libraries(5Laba PRIVATE ${SQLITE_LIB})
+else()
+    # Настройки для Linux
+    find_package(SQLite3 REQUIRED) # Ищем системную библиотеку SQLite
+    if (SQLite3_FOUND)
+        target_link_libraries(5Laba PRIVATE SQLite::SQLite3)
+    else()
+        message(FATAL_ERROR "SQLite3 не найден! Установите библиотеку SQLite3.")
+    endif()
+
+    # Подключаем библиотеку pthread (если требуется)
+    find_package(Threads REQUIRED)
+    target_link_libraries(5Laba PRIVATE Threads::Threads)
+endif()

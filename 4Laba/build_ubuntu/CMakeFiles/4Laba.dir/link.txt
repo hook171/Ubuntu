@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/4Laba.dir/link.d CMakeFiles/4Laba.dir/4Laba.cpp.o -o 4Laba

@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/2Laba.dir/link.d CMakeFiles/2Laba.dir/2Laba.cpp.o -o 2Laba  libprocess_launcher.a

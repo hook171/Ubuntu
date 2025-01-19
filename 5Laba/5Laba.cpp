@@ -1,5 +1,8 @@
-#include <winsock2.h> // Подключаем winsock2.h до windows.h
-#include <windows.h>
+#ifdef _WIN32
+    #include <winsock2.h> // Подключаем winsock2.h до windows.h
+    #include <windows.h>
+#endif
+
 #include <sqlite3.h>
 #include <httplib.h>
 #include <iostream>

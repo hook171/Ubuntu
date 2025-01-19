@@ -1,0 +1,3 @@
+/home/hook/Documents/GitHub/Ubuntu/1Laba/build_ubuntu/CMakeFiles/1Laba.dir
+/home/hook/Documents/GitHub/Ubuntu/1Laba/build_ubuntu/CMakeFiles/edit_cache.dir
+/home/hook/Documents/GitHub/Ubuntu/1Laba/build_ubuntu/CMakeFiles/rebuild_cache.dir

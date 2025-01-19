@@ -130,24 +130,24 @@ process_launcher/fast:
 .PHONY : process_launcher/fast
 
 #=============================================================================
-# Target rules for targets named Ubuntu
+# Target rules for targets named 2Laba
 
 # Build rule for target.
-Ubuntu: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Ubuntu
-.PHONY : Ubuntu
+2Laba: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 2Laba
+.PHONY : 2Laba
 
 # fast build rule for target.
-Ubuntu/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Ubuntu.dir/build.make CMakeFiles/Ubuntu.dir/build
-.PHONY : Ubuntu/fast
+2Laba/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/2Laba.dir/build.make CMakeFiles/2Laba.dir/build
+.PHONY : 2Laba/fast
 
 2Laba.o: 2Laba.cpp.o
 .PHONY : 2Laba.o
 
 # target to build an object file
 2Laba.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Ubuntu.dir/build.make CMakeFiles/Ubuntu.dir/2Laba.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/2Laba.dir/build.make CMakeFiles/2Laba.dir/2Laba.cpp.o
 .PHONY : 2Laba.cpp.o
 
 2Laba.i: 2Laba.cpp.i
@@ -155,7 +155,7 @@ Ubuntu/fast:
 
 # target to preprocess a source file
 2Laba.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Ubuntu.dir/build.make CMakeFiles/Ubuntu.dir/2Laba.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/2Laba.dir/build.make CMakeFiles/2Laba.dir/2Laba.cpp.i
 .PHONY : 2Laba.cpp.i
 
 2Laba.s: 2Laba.cpp.s
@@ -163,7 +163,7 @@ Ubuntu/fast:
 
 # target to generate assembly for a file
 2Laba.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Ubuntu.dir/build.make CMakeFiles/Ubuntu.dir/2Laba.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/2Laba.dir/build.make CMakeFiles/2Laba.dir/2Laba.cpp.s
 .PHONY : 2Laba.cpp.s
 
 process_launcher.o: process_launcher.cpp.o
@@ -198,7 +198,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... Ubuntu"
+	@echo "... 2Laba"
 	@echo "... process_launcher"
 	@echo "... 2Laba.o"
 	@echo "... 2Laba.i"

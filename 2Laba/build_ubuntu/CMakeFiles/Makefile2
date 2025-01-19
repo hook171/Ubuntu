@@ -64,12 +64,12 @@ CMAKE_BINARY_DIR = /home/hook/Documents/GitHub/Ubuntu/2Laba/build_ubuntu
 
 # The main recursive "all" target.
 all: CMakeFiles/process_launcher.dir/all
-all: CMakeFiles/Ubuntu.dir/all
+all: CMakeFiles/2Laba.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/process_launcher.dir/codegen
-codegen: CMakeFiles/Ubuntu.dir/codegen
+codegen: CMakeFiles/2Laba.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -78,7 +78,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/process_launcher.dir/clean
-clean: CMakeFiles/Ubuntu.dir/clean
+clean: CMakeFiles/2Laba.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -114,36 +114,36 @@ CMakeFiles/process_launcher.dir/clean:
 .PHONY : CMakeFiles/process_launcher.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/Ubuntu.dir
+# Target rules for target CMakeFiles/2Laba.dir
 
 # All Build rule for target.
-CMakeFiles/Ubuntu.dir/all: CMakeFiles/process_launcher.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Ubuntu.dir/build.make CMakeFiles/Ubuntu.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Ubuntu.dir/build.make CMakeFiles/Ubuntu.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/hook/Documents/GitHub/Ubuntu/2Laba/build_ubuntu/CMakeFiles --progress-num=1,2 "Built target Ubuntu"
-.PHONY : CMakeFiles/Ubuntu.dir/all
+CMakeFiles/2Laba.dir/all: CMakeFiles/process_launcher.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/2Laba.dir/build.make CMakeFiles/2Laba.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/2Laba.dir/build.make CMakeFiles/2Laba.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/hook/Documents/GitHub/Ubuntu/2Laba/build_ubuntu/CMakeFiles --progress-num=1,2 "Built target 2Laba"
+.PHONY : CMakeFiles/2Laba.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/Ubuntu.dir/rule: cmake_check_build_system
+CMakeFiles/2Laba.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/hook/Documents/GitHub/Ubuntu/2Laba/build_ubuntu/CMakeFiles 4
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Ubuntu.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/2Laba.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/hook/Documents/GitHub/Ubuntu/2Laba/build_ubuntu/CMakeFiles 0
-.PHONY : CMakeFiles/Ubuntu.dir/rule
+.PHONY : CMakeFiles/2Laba.dir/rule
 
 # Convenience name for target.
-Ubuntu: CMakeFiles/Ubuntu.dir/rule
-.PHONY : Ubuntu
+2Laba: CMakeFiles/2Laba.dir/rule
+.PHONY : 2Laba
 
 # codegen rule for target.
-CMakeFiles/Ubuntu.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Ubuntu.dir/build.make CMakeFiles/Ubuntu.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/hook/Documents/GitHub/Ubuntu/2Laba/build_ubuntu/CMakeFiles --progress-num=1,2 "Finished codegen for target Ubuntu"
-.PHONY : CMakeFiles/Ubuntu.dir/codegen
+CMakeFiles/2Laba.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/2Laba.dir/build.make CMakeFiles/2Laba.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/hook/Documents/GitHub/Ubuntu/2Laba/build_ubuntu/CMakeFiles --progress-num=1,2 "Finished codegen for target 2Laba"
+.PHONY : CMakeFiles/2Laba.dir/codegen
 
 # clean rule for target.
-CMakeFiles/Ubuntu.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Ubuntu.dir/build.make CMakeFiles/Ubuntu.dir/clean
-.PHONY : CMakeFiles/Ubuntu.dir/clean
+CMakeFiles/2Laba.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/2Laba.dir/build.make CMakeFiles/2Laba.dir/clean
+.PHONY : CMakeFiles/2Laba.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
