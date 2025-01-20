@@ -2,21 +2,16 @@
 #include <iostream>
 #include <string>
 
-#ifdef _WIN32
-    #define LOG_FILE_PATH "C:/Users/ARTEM/Documents/GitHub/Ubuntu/5Laba/db/database.db"
-#else
-    #define LOG_FILE_PATH "/home/hook/Documents/GitHub/Ubuntu/5Laba/db/database.db"
-#endif
-
 sqlite3* db;
 
+
 void init_db() {
-    int rc = sqlite3_open(LOG_FILE_PATH, &db);
+    int rc = sqlite3_open("C:/Users/hook/Documents/GitHub/Ubuntu/5Laba/db/database.db", &db);
     if (rc) {
         std::cerr << "Ошибка открытия базы данных: " << sqlite3_errmsg(db) << std::endl;
         exit(1);
     } else {
-        std::cout << "Database opened successfully." << std::endl;  // Лог
+        std::cout << "Database opened successfully." << std::endl;
     }
 
     const char* sql = "CREATE TABLE IF NOT EXISTS temperature (id INTEGER PRIMARY KEY, value REAL, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP);";
@@ -24,7 +19,7 @@ void init_db() {
     if (rc != SQLITE_OK) {
         std::cerr << "Ошибка создания таблицы: " << sqlite3_errmsg(db) << std::endl;
     } else {
-        std::cout << "Table created or already exists." << std::endl;  // Лог
+        std::cout << "Table created or already exists." << std::endl;
     }
 }
 

@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 # Указываем пути к заголовочным файлам
 include_directories(
-    ${CMAKE_SOURCE_DIR}/Libs/cpp-httplib-master
+    ${CMAKE_SOURCE_DIR}/http
     ${CMAKE_SOURCE_DIR}/Libs/SQLite
 )
 

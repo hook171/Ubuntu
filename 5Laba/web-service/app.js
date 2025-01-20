@@ -15,10 +15,11 @@ async function fetchCurrentTemperature() {
     }
 }
 
-// Функция для получения статистики за период
 async function fetchStatistics() {
     const start = document.getElementById('start').value;
     const end = document.getElementById('end').value;
+
+    console.log('Start:', start, 'End:', end);  // Логируем даты
 
     if (!start || !end) {
         alert('Please select both start and end dates.');
@@ -27,7 +28,10 @@ async function fetchStatistics() {
 
     try {
         const response = await fetch(`/stats?start=${start}&end=${end}`);
+        console.log('Response status:', response.status);  // Логируем статус ответа
+
         const data = await response.json();
+        console.log('Response data:', data);  // Логируем данные ответа
 
         if (data.error) {
             alert(data.error);

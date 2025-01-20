@@ -4,7 +4,7 @@
 #include <string>
 
 // Объявление функции для запуска HTTP-сервера
-void runHttpServer();
+void runSocketServer();
 
 // Объявление функции для получения текущей температуры
 std::string get_current_temperature();

@@ -4,7 +4,6 @@
 #endif
 
 #include <sqlite3.h>
-#include <httplib.h>
 #include <iostream>
 #include <chrono>
 #include <thread>
@@ -31,10 +30,20 @@ std::string cleanString(const std::string& input) {
 // Функция для запуска HTTP-сервера в отдельном потоке
 void startHttpServer() {
     std::cout << "Starting HTTP server..." << std::endl;
-    runHttpServer(); // Функция из http/server.cpp
+    runSocketServer(); // Функция из http/server.cpp
 }
 
 int main(int argc, char** argv) {
+
+#ifdef _WIN32
+    // Инициализация Winsock
+    WSADATA wsaData;
+    if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
+        std::cerr << "WSAStartup failed" << std::endl;
+        return -1;
+    }
+#endif
+    
     if (argc < 2) {
         std::cout << "Usage: " << argv[0] << " [port]" << std::endl;
         return -1;
@@ -96,6 +105,10 @@ int main(int argc, char** argv) {
 
     // Закрытие базы данных (этот код никогда не выполнится из-за бесконечного цикла)
     close_db();
+
+#ifdef _WIN32
+    WSACleanup();  // Завершаем Winsock перед выходом
+#endif
 
     return 0;
 }
