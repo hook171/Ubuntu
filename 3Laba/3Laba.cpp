@@ -37,7 +37,7 @@ string getCurrentTime() {
 
 // Функция для записи в лог-файл
 void logToFile(const string& message) {
-    ofstream logfile("log.txt", ios::app);
+    ofstream logfile("C:/Users/hook/Documents/GitHub/Ubuntu/3Laba/Logs/Win/logs.txt", ios::app);
     if (logfile.is_open()) {
         logfile << message << endl;
         logfile.close();
