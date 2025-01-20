@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/hook/Documents/GitHub/Ubuntu/5Laba/Libs/cpp-httplib-master -I/home/hook/Documents/GitHub/Ubuntu/5Laba/Libs/SQLite
+CXX_INCLUDES = -I/home/hook/Documents/GitHub/Ubuntu/5Laba/http -I/home/hook/Documents/GitHub/Ubuntu/5Laba/Libs/SQLite
 
 CXX_FLAGS = -std=gnu++17
 

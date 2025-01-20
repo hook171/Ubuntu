@@ -7,20 +7,27 @@
 #include "../db/db_handler.h"  // Подключаем заголовочный файл для работы с базой данных
 
 #ifdef _WIN32
+    // Windows
     #include <winsock2.h>
     #include <ws2tcpip.h>
     #pragma comment(lib, "ws2_32.lib")
     #define close_socket closesocket
-    #define read_socket recv
-    #define write_socket send
+    #define read_socket(sock, buf, len, flags) recv(sock, buf, len, flags)
+    #define write_socket(sock, buf, len, flags) send(sock, buf, len, flags)
 #else
     #include <unistd.h>
+    #include <sys/socket.h>
     #include <arpa/inet.h>
     #define close_socket close
-    #define read_socket read
-    #define write_socket write
+    #define read_socket(sock, buf, len, flags) read(sock, buf, len)
+    #define write_socket(sock, buf, len, flags) write(sock, buf, len)
 #endif
 
+#ifdef _WIN32
+    #define DB_PATH "C:/Users/hook/Documents/GitHub/Ubuntu/5Laba/web-service"
+#else
+    #define DB_PATH "/home/hook/Documents/GitHub/Ubuntu/5Laba/web-service"
+#endif
 const int PORT = 8080;  // Порт, на котором будет работать сервер
 const int BUFFER_SIZE = 4096;  // Размер буфера для чтения данных
 
@@ -162,11 +169,11 @@ void handle_request(int client_socket) {
         }
     } else {
         // Обрабатываем статические файлы
-        std::string full_path = "C:/Users/hook/Documents/GitHub/Ubuntu/5Laba/web-service" + path;
+        std::string full_path = DB_PATH + path;
 
         // Если путь пустой, возвращаем index.html
         if (path == "/") {
-            full_path = "C:/Users/hook/Documents/GitHub/Ubuntu/5Laba/web-service/index.html";
+            full_path = std::string(DB_PATH) + "/index.html";
         }
 
         // Читаем файл

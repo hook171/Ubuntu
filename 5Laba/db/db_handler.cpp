@@ -4,9 +4,14 @@
 
 sqlite3* db;
 
+#ifdef _WIN32
+    #define DB_PATH "C:/Users/hook/Documents/GitHub/Ubuntu/5Laba/db/database.db"
+#else
+    #define DB_PATH "/home/hook/Documents/GitHub/Ubuntu/5Laba/db/database.db"
+#endif
 
 void init_db() {
-    int rc = sqlite3_open("C:/Users/hook/Documents/GitHub/Ubuntu/5Laba/db/database.db", &db);
+    int rc = sqlite3_open(DB_PATH, &db);
     if (rc) {
         std::cerr << "Ошибка открытия базы данных: " << sqlite3_errmsg(db) << std::endl;
         exit(1);

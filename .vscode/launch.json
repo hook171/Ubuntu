@@ -219,7 +219,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/4Laba/build_ubuntu/4Laba",
-            "args": ["/dev/pts/9"], // Виртуальный порт 1
+            "args": ["/dev/pts/4"], // Виртуальный порт 1
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/4Laba/build_ubuntu",
             "environment": [],
@@ -240,7 +240,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/4Laba/build_ubuntu/temperature_simulator",
-            "args": ["/dev/pts/10"], // Виртуальный порт 2
+            "args": ["/dev/pts/5"], // Виртуальный порт 2
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/4Laba/build_ubuntu",
             "environment": [],
@@ -261,7 +261,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/5Laba/build_ubuntu/5Laba",
-            "args": ["/dev/pts/9"], // Виртуальный порт 1
+            "args": ["/dev/pts/4"], // Виртуальный порт 1
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/5Laba/build_ubuntu",
             "environment": [],
@@ -282,7 +282,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/5Laba/build_ubuntu/temperature_simulator",
-            "args": ["/dev/pts/10"], // Виртуальный порт 2
+            "args": ["/dev/pts/5"], // Виртуальный порт 2
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/5Laba/build_ubuntu",
             "environment": [],

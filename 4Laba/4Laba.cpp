@@ -11,7 +11,7 @@
 #include "my_serial.hpp"
 
 #ifdef _WIN32
-    #define LOG_FILE_PATH "C:/Users/ARTEM/Documents/GitHub/Ubuntu/4Laba/Tests/measurements.log"
+    #define LOG_FILE_PATH "C:/Users/hook/Documents/GitHub/Ubuntu/4Laba/Tests/measurements.log"
 #else
     #define LOG_FILE_PATH "/home/hook/Documents/GitHub/Ubuntu/4Laba/Tests/measurements.log"
 #endif

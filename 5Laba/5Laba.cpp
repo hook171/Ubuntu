@@ -80,6 +80,8 @@ int main(int argc, char** argv) {
             buffer[read] = '\0';  // Добавляем нулевой символ для корректного вывода строки
             std::string data(buffer);
 
+            std::cout << "Raw data: " << data << std::endl;
+
             // Очищаем данные от нечитаемых символов
             std::string cleanData = cleanString(data);
             std::cout << "Received: " << cleanData << std::endl;
