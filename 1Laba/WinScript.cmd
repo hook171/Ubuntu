@@ -7,7 +7,7 @@ REM Обновление репозитория
 git pull origin main
 
 REM Список лабораторных работ
-set LABS=1Laba 2Laba 4Laba 5Laba
+set LABS=1Laba 2Laba 4Laba 3Laba 5Laba
 
 REM Цикл по каждой лабораторной работе
 for %%L in (%LABS%) do (

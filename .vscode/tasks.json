@@ -6,15 +6,16 @@
             "type": "shell",
             "command": "cmake",
             "args": [
-                "-S", "${workspaceFolder}/${relativeFileDirname}", // Путь к текущей папке
-                "-B", "${workspaceFolder}/${relativeFileDirname}/build_windows",
+                "-S",
+                "${workspaceFolder}/${relativeFileDirname}",
+                "-B",
+                "${workspaceFolder}/${relativeFileDirname}/build_windows",
                 "-DCMAKE_BUILD_TYPE=Debug"
             ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "problemMatcher": ["$gcc"],
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ],
             "detail": "Конфигурация и сборка проекта с помощью CMake"
         },
         {
@@ -23,7 +24,7 @@
             "command": "cmd.exe",
             "args": [
                 "/c",
-                "${workspaceFolder}/1Laba/WinScript.cmd" // Путь к скрипту в текущей папке
+                "${workspaceFolder}/1Laba/WinScript.cmd"
             ],
             "windows": {
                 "command": "cmd.exe",
@@ -58,6 +59,29 @@
             },
             "problemMatcher": [],
             "detail": "Запуск Ubuntu-скрипта"
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe сборка активного файла",
+            "command": "C:\\msys64\\mingw64\\bin\\g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Задача создана отладчиком."
         }
     ]
 }

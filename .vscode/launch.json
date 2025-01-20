@@ -45,6 +45,27 @@
             "preLaunchTask": "Run CMD Script"
         },
         {
+            "name": "Debug 3Laba (Windows)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/3Laba/build_windows/Debug/3Laba.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/3Laba/build_windows/Debug",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Run CMD Script"
+        },
+        {
             "name": "Debug 4Laba (COM3) (Windows)",
             "type": "cppdbg",
             "request": "launch",
