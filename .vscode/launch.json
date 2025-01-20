@@ -194,6 +194,27 @@
             "preLaunchTask": "Run Ubuntu Script"
         },
         {
+            "name": "Debug 3Laba (Linux)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/3Laba/build_ubuntu/3Laba",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/3Laba/build_ubuntu",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Run Ubuntu Script"
+        },
+        {
             "name": "Debug 4Laba (Virtual Port 1) (Linux)",
             "type": "cppdbg",
             "request": "launch",

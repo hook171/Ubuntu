@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/3Laba.dir/link.d CMakeFiles/3Laba.dir/3Laba.cpp.o -o 3Laba  -lpthread

@@ -6,8 +6,18 @@
 #include <sstream>
 #include <iomanip>
 #include <fstream>
-#include <windows.h>
-#include "my_shmem.hpp"
+
+// Определение ОС
+#if defined(_WIN32) || defined(_WIN64)
+    #define OS_WINDOWS
+    #include <windows.h>
+#else
+    #define OS_LINUX
+    #include <unistd.h>       // Для fork, getpid
+    #include <sys/wait.h>     // Для waitpid
+#endif
+
+#include "my_shmem.hpp" 
 
 using namespace std;
 using namespace cplib;
@@ -28,7 +38,11 @@ string getCurrentTime() {
     auto now_ms = chrono::duration_cast<chrono::milliseconds>(now.time_since_epoch()) % 1000;
 
     tm local_tm;
+#if defined(OS_WINDOWS)
     localtime_s(&local_tm, &now_time_t);  // Используем localtime_s для Windows
+#else
+    localtime_r(&now_time_t, &local_tm);  // Используем localtime_r для Linux
+#endif
 
     stringstream ss;
     ss << put_time(&local_tm, "%Y-%m-%d %H:%M:%S") << "." << setw(3) << setfill('0') << now_ms.count();
@@ -37,7 +51,7 @@ string getCurrentTime() {
 
 // Функция для записи в лог-файл
 void logToFile(const string& message) {
-    ofstream logfile("C:/Users/hook/Documents/GitHub/Ubuntu/3Laba/Logs/Win/logs.txt", ios::app);
+    ofstream logfile("/home/hook/Documents/GitHub/Ubuntu/3Laba/Logs/logs.txt", ios::app);  // Путь к лог-файлу
     if (logfile.is_open()) {
         logfile << message << endl;
         logfile.close();
@@ -62,7 +76,13 @@ void logCounter() {
         this_thread::sleep_for(chrono::seconds(1));
         sharedMem->Lock();
         int counter = sharedMem->Data()->counter;
-        string logMessage = getCurrentTime() + " [PID: " + to_string(GetCurrentProcessId()) + "] [MAIN] Текущее значение счетчика: " + to_string(counter);
+        string logMessage = getCurrentTime() + " [PID: " + to_string(
+#if defined(OS_WINDOWS)
+            GetCurrentProcessId()
+#else
+            getpid()
+#endif
+        ) + "] [MAIN] Текущее значение счетчика: " + to_string(counter);
         logToFile(logMessage);
         sharedMem->Unlock();
     }
@@ -74,7 +94,13 @@ void copy1Task() {
     int oldValue = sharedMem->Data()->counter;
     sharedMem->Data()->counter += 10;
     int newValue = sharedMem->Data()->counter;
-    string logMessage = getCurrentTime() + " [PID: " + to_string(GetCurrentProcessId()) + "] [COPY 1] Увеличиваю счетчик на 10. Старое значение: " + to_string(oldValue) + ", новое значение: " + to_string(newValue);
+    string logMessage = getCurrentTime() + " [PID: " + to_string(
+#if defined(OS_WINDOWS)
+        GetCurrentProcessId()
+#else
+        getpid()
+#endif
+    ) + "] [COPY 1] Увеличиваю счетчик на 10. Старое значение: " + to_string(oldValue) + ", новое значение: " + to_string(newValue);
     logToFile(logMessage);
     sharedMem->Unlock();
 }
@@ -85,7 +111,13 @@ void copy2Task() {
     int oldValue = sharedMem->Data()->counter;
     sharedMem->Data()->counter *= 2;
     int newValue = sharedMem->Data()->counter;
-    string logMessage = getCurrentTime() + " [PID: " + to_string(GetCurrentProcessId()) + "] [COPY 2] Умножаю счетчик на 2. Старое значение: " + to_string(oldValue) + ", новое значение: " + to_string(newValue);
+    string logMessage = getCurrentTime() + " [PID: " + to_string(
+#if defined(OS_WINDOWS)
+        GetCurrentProcessId()
+#else
+        getpid()
+#endif
+    ) + "] [COPY 2] Умножаю счетчик на 2. Старое значение: " + to_string(oldValue) + ", новое значение: " + to_string(newValue);
     logToFile(logMessage);
     sharedMem->Unlock();
 
@@ -95,7 +127,13 @@ void copy2Task() {
     oldValue = sharedMem->Data()->counter;
     sharedMem->Data()->counter /= 2;
     newValue = sharedMem->Data()->counter;
-    logMessage = getCurrentTime() + " [PID: " + to_string(GetCurrentProcessId()) + "] [COPY 2] Делю счетчик на 2. Старое значение: " + to_string(oldValue) + ", новое значение: " + to_string(newValue);
+    logMessage = getCurrentTime() + " [PID: " + to_string(
+#if defined(OS_WINDOWS)
+        GetCurrentProcessId()
+#else
+        getpid()
+#endif
+    ) + "] [COPY 2] Делю счетчик на 2. Старое значение: " + to_string(oldValue) + ", новое значение: " + to_string(newValue);
     logToFile(logMessage);
     sharedMem->Unlock();
 }
@@ -105,7 +143,8 @@ void spawnCopies() {
     while (running) {
         this_thread::sleep_for(chrono::seconds(3));
 
-        // Запуск копии 1
+#if defined(OS_WINDOWS)
+        // Запуск копии 1 (Windows)
         STARTUPINFO si1 = { sizeof(si1) };
         PROCESS_INFORMATION pi1;
         if (CreateProcess(NULL, "3Laba.exe Copy1", NULL, NULL, FALSE, 0, NULL, NULL, &si1, &pi1)) {
@@ -116,7 +155,7 @@ void spawnCopies() {
             CloseHandle(pi1.hThread);
         }
 
-        // Запуск копии 2
+        // Запуск копии 2 (Windows)
         STARTUPINFO si2 = { sizeof(si2) };
         PROCESS_INFORMATION pi2;
         if (CreateProcess(NULL, "3Laba.exe Copy2", NULL, NULL, FALSE, 0, NULL, NULL, &si2, &pi2)) {
@@ -126,6 +165,29 @@ void spawnCopies() {
             CloseHandle(pi2.hProcess);
             CloseHandle(pi2.hThread);
         }
+#else
+        // Запуск копии 1 (Linux)
+        pid_t pid1 = fork();
+        if (pid1 == 0) {  // Дочерний процесс
+            copy1Task();
+            exit(0);  // Завершаем дочерний процесс
+        } else if (pid1 > 0) {  // Родительский процесс
+            string logMessage = getCurrentTime() + " [PID: " + to_string(getpid()) + "] [MAIN] Запущена COPY 1.";
+            logToFile(logMessage);
+            waitpid(pid1, nullptr, 0);  // Ожидаем завершения дочернего процесса
+        }
+
+        // Запуск копии 2 (Linux)
+        pid_t pid2 = fork();
+        if (pid2 == 0) {  // Дочерний процесс
+            copy2Task();
+            exit(0);  // Завершаем дочерний процесс
+        } else if (pid2 > 0) {  // Родительский процесс
+            string logMessage = getCurrentTime() + " [PID: " + to_string(getpid()) + "] [MAIN] Запущена COPY 2.";
+            logToFile(logMessage);
+            waitpid(pid2, nullptr, 0);  // Ожидаем завершения дочернего процесса
+        }
+#endif
     }
 }
 
@@ -152,7 +214,13 @@ int main(int argc, char* argv[]) {
     }
 
     // Запись в лог при старте
-    string logMessage = getCurrentTime() + " [PID: " + to_string(GetCurrentProcessId()) + "] [MAIN] Программа запущена.";
+    string logMessage = getCurrentTime() + " [PID: " + to_string(
+#if defined(OS_WINDOWS)
+        GetCurrentProcessId()
+#else
+        getpid()
+#endif
+    ) + "] [MAIN] Программа запущена.";
     logToFile(logMessage);
 
     // Запуск потоков
@@ -176,7 +244,13 @@ int main(int argc, char* argv[]) {
             sharedMem->Lock();
             int oldValue = sharedMem->Data()->counter;
             sharedMem->Data()->counter = newValue;
-            string logMessage = getCurrentTime() + " [PID: " + to_string(GetCurrentProcessId()) + "] [MAIN] Пользователь изменил счетчик. Старое значение: " + to_string(oldValue) + ", новое значение: " + to_string(newValue);
+            string logMessage = getCurrentTime() + " [PID: " + to_string(
+#if defined(OS_WINDOWS)
+                GetCurrentProcessId()
+#else
+                getpid()
+#endif
+            ) + "] [MAIN] Пользователь изменил счетчик. Старое значение: " + to_string(oldValue) + ", новое значение: " + to_string(newValue);
             logToFile(logMessage);
             sharedMem->Unlock();
         } catch (invalid_argument&) {
@@ -190,7 +264,13 @@ int main(int argc, char* argv[]) {
     spawnThread.join();
 
     // Запись в лог при завершении
-    logMessage = getCurrentTime() + " [PID: " + to_string(GetCurrentProcessId()) + "] [MAIN] Программа завершена.";
+    logMessage = getCurrentTime() + " [PID: " + to_string(
+#if defined(OS_WINDOWS)
+        GetCurrentProcessId()
+#else
+        getpid()
+#endif
+    ) + "] [MAIN] Программа завершена.";
     logToFile(logMessage);
 
     // Освобождение ресурсов

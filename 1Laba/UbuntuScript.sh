@@ -4,7 +4,7 @@
 git pull origin main
 
 # Список лабораторных работ
-LABS=("1Laba" "2Laba" "4Laba" "5Laba")
+LABS=("1Laba" "2Laba" "3Laba" "4Laba" "5Laba")
 
 # Цикл по каждой лабораторной работе
 for LAB in "${LABS[@]}"; do
